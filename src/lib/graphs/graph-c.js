@@ -1,14 +1,7 @@
-const _ = require('underscore')
 const graphlib = require("@dagrejs/graphlib")
 
 function graphC() {
   let graph = new graphlib.Graph()
-  _.range(1, 14).forEach((i) => {
-    graph.setNode(String(i), { type: 1 })
-  })
-  _.range(15, 21).forEach((i) => {
-    graph.setNode(String(i), { type: 0 })
-  })
   const doubleEdges = [
     [1, 2],
     [2, 'A'],
