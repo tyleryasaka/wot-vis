@@ -95,22 +95,33 @@ class App extends Component {
     }
 
     const status = MODE_STATUS[mode]
+    let dashView
+    if (!mode) {
+      dashView = (
+        <div>
+          { from && to && (
+            <div>
+              Trust from {from} to {to}: {trust}
+            </div>
+          ) }
+          <button onClick={this.modeSelectFrom.bind(this)}>
+            measure trust
+          </button>
+        </div>
+      )
+    } else if ((mode === MODE_SELECT_FROM) || (mode === MODE_SELECT_TO)) {
+      dashView = (
+        <div>
+          {status}
+        </div>
+      )
+    }
 
     return (
       <div className="App">
         <div className="container">
           <div className="controls section">
-            <div className="section">
-              <div>
-                Trust from {from}, to {to}: {trust}
-              </div>
-              <button onClick={this.modeSelectFrom.bind(this)}>
-                measure trust
-              </button>
-            </div>
-            <div className="section">
-              {status}
-            </div>
+            {dashView}
           </div>
           <div className="display section">
             <Graph graph={graphVis} options={options} events={events} />
