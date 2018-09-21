@@ -1,2 +1,5 @@
 {
+  "initialGraph": "e",
+  "initialAlgorithm": "2",
+  "discount": 0.2
 }

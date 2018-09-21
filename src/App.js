@@ -5,9 +5,13 @@ import Graph from 'react-graph-vis';
 import graphLib from '@dagrejs/graphlib'
 
 import graphConfig from './graph-config.json'
-const { startGraph = 'a' } = graphConfig
+const {
+  initialGraph: initialGraphName,
+  initialAlgorithm: initialAlgorithmName
+} = graphConfig
 
-const graph = require(`./lib/graphs/graph-${startGraph}`)
+const initialGraph = require(`./lib/graphs/graph-${initialGraphName}`)
+const initialAlgorithm = require(`./lib/algorithms/alg-${initialAlgorithmName}`)
 
 const graphToVis = (graphObj) => {
   const graphJson = graphLib.json.write(graphObj)
@@ -38,7 +42,9 @@ class App extends Component {
     super(props)
     this.state = {
       mode: null,
-      measureTrust: { from: null, to: null }
+      measureTrust: { from: null, to: null },
+      graph: initialGraph,
+      algorithm: initialAlgorithm
     }
   }
 
@@ -47,7 +53,10 @@ class App extends Component {
   }
 
   modeSelectFrom() {
-    this.setState({ mode: MODE_SELECT_FROM })
+    this.setState({
+      mode: MODE_SELECT_FROM,
+      measureTrust: { from: null, to: null }
+    })
   }
 
   modeSelectTo() {
@@ -74,8 +83,9 @@ class App extends Component {
   }
 
   render() {
-    const { mode, measureTrust: { from, to } } = this.state
+    const { mode, measureTrust: { from, to }, graph, algorithm } = this.state
     const graphVis = graphToVis(graph)
+    const trust = (from && to) ? algorithm(graph, from, to) : null
 
     const events = {
       select: (event) => {
@@ -92,7 +102,7 @@ class App extends Component {
           <div className="controls section">
             <div className="section">
               <div>
-                Trust from {from}, to {to}:
+                Trust from {from}, to {to}: {trust}
               </div>
               <button onClick={this.modeSelectFrom.bind(this)}>
                 measure trust
