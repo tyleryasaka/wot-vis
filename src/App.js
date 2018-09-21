@@ -20,9 +20,6 @@ const graphToVis = (graphGenerator) => {
 const graphVis = graphToVis(graph)
 
 const options = {
-  layout: {
-    hierarchical: true
-  },
   edges: {
     color: "#000000"
   }
