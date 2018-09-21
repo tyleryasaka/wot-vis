@@ -20,27 +20,86 @@ const graphToVis = (graphObj) => {
   return { nodes, edges }
 }
 
-const graphVis = graphToVis(graph)
-
 const options = {
   edges: {
     color: "#000000"
   }
 }
 
-const events = {
-  select: function(event) {
-    var { nodes, edges } = event;
-  }
-}
+const MODE_SELECT_FROM = 'select-from'
+const MODE_SELECT_TO = 'select-to'
+
+const MODE_STATUS = {}
+MODE_STATUS[MODE_SELECT_FROM] = 'Select the observer node'
+MODE_STATUS[MODE_SELECT_TO] = 'Select the observed node'
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      mode: null,
+      measureTrust: { from: null, to: null }
+    }
+  }
+
+  modeReset() {
+    this.setState({ mode: null })
+  }
+
+  modeSelectFrom() {
+    this.setState({ mode: MODE_SELECT_FROM })
+  }
+
+  modeSelectTo() {
+    this.setState({ mode: MODE_SELECT_TO })
+  }
+
+  setFrom(from) {
+    this.setState({ measureTrust: { ...this.state.measureTrust, from } })
+  }
+
+  setTo(to) {
+    this.setState({ measureTrust: { ...this.state.measureTrust, to } })
+  }
+
+  onNodeSelect(nodes, edges) {
+    const { mode } = this.state
+    if (mode === MODE_SELECT_FROM) {
+      this.setFrom(nodes[0])
+      this.modeSelectTo()
+    } else if (mode === MODE_SELECT_TO) {
+      this.setTo(nodes[0])
+      this.modeReset()
+    }
+  }
+
   render() {
+    const { mode, measureTrust: { from, to } } = this.state
+    const graphVis = graphToVis(graph)
+
+    const events = {
+      select: (event) => {
+        const { nodes, edges } = event;
+        this.onNodeSelect(nodes, edges)
+      }
+    }
+
+    const status = MODE_STATUS[mode]
+
     return (
       <div className="App">
         <div className="container">
           <div className="controls section">
             <div className="section">
+              <div>
+                Trust from {from}, to {to}:
+              </div>
+              <button onClick={this.modeSelectFrom.bind(this)}>
+                measure trust
+              </button>
+            </div>
+            <div className="section">
+              {status}
             </div>
           </div>
           <div className="display section">
