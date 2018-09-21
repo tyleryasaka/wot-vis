@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Graph from 'react-graph-vis';
-import graph from './lib/graphs/graph-f'
 import graphLib from '@dagrejs/graphlib'
+
+import graphConfig from './graph-config.json'
+const { startGraph = 'a' } = graphConfig
+
+const graph = require(`./lib/graphs/graph-${startGraph}`)
 
 const graphToVis = (graphGenerator) => {
   const graph = graphGenerator()
