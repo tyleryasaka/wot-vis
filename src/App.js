@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Graph from 'react-graph-vis';
+import graphA from './lib/graphs/graph-a'
+import graphLib from '@dagrejs/graphlib'
+
+const graphAJson = graphLib.json.write(graphA())
 
 const graph = {
   nodes: [
