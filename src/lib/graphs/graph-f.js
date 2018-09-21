@@ -16,4 +16,4 @@ function graphF() {
   return graph
 }
 
-module.exports = graphF
+module.exports = graphF()

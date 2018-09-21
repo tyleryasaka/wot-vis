@@ -9,4 +9,4 @@ function graphB() {
   return graph
 }
 
-module.exports = graphB
+module.exports = graphB()

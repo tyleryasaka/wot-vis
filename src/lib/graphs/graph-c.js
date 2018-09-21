@@ -62,4 +62,4 @@ function graphC() {
   return graph
 }
 
-module.exports = graphC
+module.exports = graphC()

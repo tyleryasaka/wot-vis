@@ -9,9 +9,8 @@ const { startGraph = 'a' } = graphConfig
 
 const graph = require(`./lib/graphs/graph-${startGraph}`)
 
-const graphToVis = (graphGenerator) => {
-  const graph = graphGenerator()
-  const graphJson = graphLib.json.write(graph)
+const graphToVis = (graphObj) => {
+  const graphJson = graphLib.json.write(graphObj)
   const nodes = graphJson.nodes.map(node => {
     return { id: node.v, label: node.v }
   })

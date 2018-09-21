@@ -1,7 +1,7 @@
 const _ = require('underscore')
 const graphlib = require("@dagrejs/graphlib")
 
-function graphF() {
+function graphG() {
   let graph = new graphlib.Graph()
   const edges = [
     ['A', 1],
@@ -19,4 +19,4 @@ function graphF() {
   return graph
 }
 
-module.exports = graphF
+module.exports = graphG()

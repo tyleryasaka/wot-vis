@@ -12,4 +12,4 @@ function graphA() {
   return graph
 }
 
-module.exports = graphA
+module.exports = graphA()

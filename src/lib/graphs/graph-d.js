@@ -1,6 +1,6 @@
 const graphlib = require("@dagrejs/graphlib")
 
-function graphC() {
+function graphD() {
   let graph = new graphlib.Graph()
   const doubleEdges = [
     [1, 2],
@@ -68,4 +68,4 @@ function graphC() {
   return graph
 }
 
-module.exports = graphC
+module.exports = graphD()
