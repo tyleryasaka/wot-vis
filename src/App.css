@@ -22,8 +22,7 @@ html, body {
 
 .controls {
   z-index: 100;
-  background: #eee;
-  box-shadow: 0 0 10px #ccc;
+  background: #000;
   display: flex;
 }
 
@@ -33,5 +32,7 @@ html, body {
 }
 
 .display {
-  background: #111;
+  background: #000000;
+  background: rgb(12,50,24);
+  background: linear-gradient(299deg, rgba(12,50,24,1) 0%, rgba(9,27,36,1) 49%, rgba(61,15,41,1) 100%);
 }

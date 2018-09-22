@@ -27,9 +27,9 @@ const NODE_BAD = 'bad'
 const NODE_CONFUSED = 'confused'
 
 const NODE_COLORS = {}
-NODE_COLORS[NODE_GOOD] = '#00e059'
-NODE_COLORS[NODE_BAD] = '#ea3a3a'
-NODE_COLORS[NODE_CONFUSED] = '#efeb20'
+NODE_COLORS[NODE_GOOD] = '#39ff7b'
+NODE_COLORS[NODE_BAD] = '#ff3aa9'
+NODE_COLORS[NODE_CONFUSED] = '#37c3ff'
 
 const graphToVis = (graphObj) => {
   const graphJson = graphLib.json.write(graphObj)
@@ -39,6 +39,7 @@ const graphToVis = (graphObj) => {
     return {
       id: node.v,
       // label: node.v,
+      borderWidth: 0,
       color
     }
   })
@@ -48,6 +49,15 @@ const graphToVis = (graphObj) => {
       to: edge.w,
       smooth: {
         enabled: true
+      },
+      width: 3,
+      chosen: {
+        edge: (values => {
+          values.opacity = 0.9
+        })
+      },
+      color: {
+        opacity: 0.25
       }
     }
   })
