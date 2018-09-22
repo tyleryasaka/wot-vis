@@ -36,7 +36,11 @@ const graphToVis = (graphObj) => {
   const nodes = graphJson.nodes.map(node => {
     const value = node.value || 'good'
     const color = NODE_COLORS[value]
-    return { id: node.v, color }
+    return {
+      id: node.v,
+      // label: node.v,
+      color
+    }
   })
   const edges = graphJson.edges.map(edge => {
     return { from: edge.v, to: edge.w }
