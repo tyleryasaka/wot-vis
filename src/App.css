@@ -31,3 +31,7 @@ html, body {
   text-align: center;
   width: 100%;
 }
+
+.display {
+  background: #111;
+}

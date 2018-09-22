@@ -27,9 +27,9 @@ const NODE_BAD = 'bad'
 const NODE_CONFUSED = 'confused'
 
 const NODE_COLORS = {}
-NODE_COLORS[NODE_GOOD] = '#d4f7c8'
-NODE_COLORS[NODE_BAD] = '#f7c8c8'
-NODE_COLORS[NODE_CONFUSED] = '#f7f3c8'
+NODE_COLORS[NODE_GOOD] = '#00e059'
+NODE_COLORS[NODE_BAD] = '#ea3a3a'
+NODE_COLORS[NODE_CONFUSED] = '#efeb20'
 
 const graphToVis = (graphObj) => {
   const graphJson = graphLib.json.write(graphObj)
