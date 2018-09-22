@@ -13,22 +13,7 @@ const {
 const initialGraph = require(`./lib/graphs/graph-${initialGraphName}`)
 const initialAlgorithm = require(`./lib/algorithms/alg-${initialAlgorithmName}`)
 
-const graphToVis = (graphObj) => {
-  const graphJson = graphLib.json.write(graphObj)
-  const nodes = graphJson.nodes.map(node => {
-    return { id: node.v, label: node.v }
-  })
-  const edges = graphJson.edges.map(edge => {
-    return { from: edge.v, to: edge.w }
-  })
-  return { nodes, edges }
-}
-
-const options = {
-  edges: {
-    color: "#000000"
-  }
-}
+const options = {}
 
 const MODE_SELECT_FROM = 'select-from'
 const MODE_SELECT_TO = 'select-to'
@@ -36,6 +21,28 @@ const MODE_SELECT_TO = 'select-to'
 const MODE_STATUS = {}
 MODE_STATUS[MODE_SELECT_FROM] = 'Select the observer node'
 MODE_STATUS[MODE_SELECT_TO] = 'Select the observed node'
+
+const NODE_GOOD = 'good'
+const NODE_BAD = 'bad'
+const NODE_CONFUSED = 'confused'
+
+const NODE_COLORS = {}
+NODE_COLORS[NODE_GOOD] = '#d4f7c8'
+NODE_COLORS[NODE_BAD] = '#f7c8c8'
+NODE_COLORS[NODE_CONFUSED] = '#f7f3c8'
+
+const graphToVis = (graphObj) => {
+  const graphJson = graphLib.json.write(graphObj)
+  const nodes = graphJson.nodes.map(node => {
+    const value = node.value || 'good'
+    const color = NODE_COLORS[value]
+    return { id: node.v, label: node.v, color }
+  })
+  const edges = graphJson.edges.map(edge => {
+    return { from: edge.v, to: edge.w }
+  })
+  return { nodes, edges }
+}
 
 class App extends Component {
   constructor(props) {
