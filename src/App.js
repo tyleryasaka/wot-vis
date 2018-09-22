@@ -43,7 +43,13 @@ const graphToVis = (graphObj) => {
     }
   })
   const edges = graphJson.edges.map(edge => {
-    return { from: edge.v, to: edge.w }
+    return {
+      from: edge.v,
+      to: edge.w,
+      smooth: {
+        enabled: true
+      }
+    }
   })
   return { nodes, edges }
 }
