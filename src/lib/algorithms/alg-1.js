@@ -1,4 +1,4 @@
-const _ = require('underscore')
+import _ from 'underscore'
 
 // returns array
 function getConnectionsHelp(graph, source, target, current, distance, visited) {
@@ -41,4 +41,4 @@ function getTrust(graph, source, target, weightFn = gravityWeight) {
   return connections.reduce((acc, cur) => acc + weightFn(cur), 0)
 }
 
-module.exports = getTrust
+export default getTrust

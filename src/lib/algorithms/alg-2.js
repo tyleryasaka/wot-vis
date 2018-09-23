@@ -1,4 +1,4 @@
-const _ = require('underscore')
+import _ from 'underscore'
 
 function getTrust(graph, source, target, visited = []) {
   if (source === target) {
@@ -16,4 +16,4 @@ function getTrust(graph, source, target, visited = []) {
   return subScores.reduce((acc, cur) => acc + cur, 0)
 }
 
-module.exports = getTrust
+export default getTrust

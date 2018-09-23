@@ -29,4 +29,4 @@ function getTrust(graph, source, target, visited = []) {
   }
 }
 
-module.exports = getTrust
+export default getTrust

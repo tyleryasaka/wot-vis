@@ -3,15 +3,17 @@ import logo from './logo.svg';
 import './App.css';
 import Graph from 'react-graph-vis';
 import graphLib from '@dagrejs/graphlib'
+import algorithm1Fn from './lib/algorithms/alg-1'
+import algorithm2Fn from './lib/algorithms/alg-2'
+import algorithm3Fn from './lib/algorithms/alg-3'
 
 import graphConfig from './graph-config.json'
+
 const {
-  initialGraph: initialGraphName,
-  initialAlgorithm: initialAlgorithmName
+  initialGraph: initialGraphName
 } = graphConfig
 
 const initialGraph = require(`./lib/graphs/graph-${initialGraphName}`)
-const initialAlgorithm = require(`./lib/algorithms/alg-${initialAlgorithmName}`)
 
 const MODE_SELECT_FROM = 'select-from'
 const MODE_SELECT_TO = 'select-to'
@@ -33,14 +35,20 @@ NODE_COLORS[NODE_CONFUSED] = '#37c3ff'
 const OBSERVER_NODE_COLOR = '#fff'
 const TARGET_NODE_COLOR = '#fff'
 
+const ALGORITHMS = [
+  { name: 'algirithm 1', fn: algorithm1Fn },
+  { name: 'algorithm 2', fn: algorithm2Fn },
+  { name: 'algorithm 3', fn: algorithm3Fn }
+]
+
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      algorithm: ALGORITHMS[0],
       mode: MODE_DEFAULT,
       measureTrust: { from: null, to: null },
       graph: initialGraph,
-      algorithm: initialAlgorithm,
       visOptions: {
         edges: {
           smooth: {
@@ -126,7 +134,7 @@ class App extends Component {
   render() {
     const { mode, measureTrust: { from, to }, graph, algorithm, visOptions } = this.state
     const graphVis = this.graphToVis(graph)
-    const trust = (from && to) ? algorithm(graph, from, to) : null
+    const trust = (from && to) ? algorithm.fn(graph, from, to) : null
 
     const events = {
       select: (event) => {
