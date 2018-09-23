@@ -149,6 +149,17 @@ class App extends Component {
     return (
       <div className="App">
         <div className="container">
+          <div className="legend">
+            <div className="legend-item good">
+              good nodes
+            </div>
+            <div className="legend-item bad">
+              bad nodes
+            </div>
+            <div className="legend-item confused">
+              confused nodes
+            </div>
+          </div>
           <div className="controls section">
             <div className="trust-score">
               {helpText}

@@ -46,24 +46,74 @@ html, body {
 }
 
 .button {
+  font-weight: bold;
   font-size: 22px;
   border-radius: 26px;
-  color: #222;
+  border: 3px solid #39ff7b;
+  color: #39ff7b;
   padding: 10px;
   padding-bottom: 15px;
   opacity: 0.75;
   display: inline-block;
-  background: #39ff7b;
   width: 160px;
   box-shadow: 0 0 10px #000;
 }
 
 .button:hover {
+  background: rgba(255, 255, 255, 0.01);
   opacity: 1;
   cursor: pointer;
 }
 
 .trust-score {
   margin-bottom: 15px;
-  font-size: 40px;
+  font-size: 36px;
+}
+
+.legend {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1;
+  font-family: 'Dosis', sans-serif;
+  font-size: 22px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.legend-item {
+  margin-bottom: 2px;
+}
+
+.legend-item::before{
+  margin-right: 20px;
+  content: '';
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 7.5px;
+}
+
+.legend-item.good {
+  color: #39ff7b;
+}
+
+.legend-item.good::before {
+  background-color: #39ff7b;
+}
+
+.legend-item.bad {
+  color: #ff3aa9;
+}
+
+.legend-item.bad::before {
+  background-color: #ff3aa9;
+}
+
+.legend-item.confused {
+  color: #37c3ff;
+}
+
+.legend-item.confused::before {
+  background-color: #37c3ff;
 }
