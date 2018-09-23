@@ -203,7 +203,7 @@ class App extends Component {
 
     const modalAlgorithm = (currentModal === MODAL_ALGORITHM) && (
       <div className="modal algorithm">
-        select algorithm
+        select metric
         {
           ALGORITHMS.map((algorithm, index) =>
             <div className="selection-option" onClick={this.onAlgorithmSelect.bind(this, index)}>
@@ -249,7 +249,7 @@ class App extends Component {
               graph: {graph.name}
             </div>
             <div className="selection algorithm" onClick={this.openModalAlgorithm.bind(this)}>
-              algorithm: {algorithm.name}
+              metric: {algorithm.name}
             </div>
           </div>
           <div className="links">
