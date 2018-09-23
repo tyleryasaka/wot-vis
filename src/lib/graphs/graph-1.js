@@ -1,10 +1,10 @@
 const _ = require('underscore')
 const graphlib = require('@dagrejs/graphlib')
 
-function graphC() {
+function graphE() {
   let graph = new graphlib.Graph()
-  const confusedNodes = [10, 13]
-  const badNodes = _.range(14, 24).concat('C')
+  const confusedNodes = [10]
+  const badNodes = [14]
   const doubleEdges = [
     [1, 2],
     [2, 'A'],
@@ -27,33 +27,12 @@ function graphC() {
     [8, 11],
     [9, 11],
     ['B', 11],
-    [10, 11],
+    [13, 11],
 
     [4, 11]
   ]
   const edges = [
-    [10, 14],
-    [13, 14],
-
-    [14, 15],
-    [14, 16],
-    [14, 17],
-    [14, 18],
-    [14, 19],
-    [14, 20],
-    [14, 21],
-    [14, 22],
-    [14, 23],
-
-    [15, 'C'],
-    [16, 'C'],
-    [17, 'C'],
-    [18, 'C'],
-    [19, 'C'],
-    [20, 'C'],
-    [21, 'C'],
-    [22, 'C'],
-    [23, 'C'],
+    [10, 14]
   ]
   doubleEdges.forEach(([a, b]) => {
     graph.setEdge(String(a), String(b))
@@ -71,4 +50,4 @@ function graphC() {
   return graph
 }
 
-module.exports = graphC()
+module.exports = graphE()

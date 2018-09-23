@@ -10,12 +10,9 @@ import algorithm2Fn from './lib/algorithms/alg-2'
 import algorithm3Fn from './lib/algorithms/alg-3'
 import algorithm4Fn from './lib/algorithms/alg-4'
 
-import graphObj1 from './lib/graphs/graph-e'
-import graphObj2 from './lib/graphs/graph-c'
-import graphObj3 from './lib/graphs/graph-b'
-import graphObj4 from './lib/graphs/graph-a'
-import graphObj5 from './lib/graphs/graph-f'
-import graphObj6 from './lib/graphs/graph-g'
+import graphObj1 from './lib/graphs/graph-1'
+import graphObj2 from './lib/graphs/graph-2'
+import graphObj3 from './lib/graphs/graph-3'
 
 const MODE_SELECT_FROM = 'select-from'
 const MODE_SELECT_TO = 'select-to'
@@ -50,10 +47,7 @@ const ALGORITHMS = [
 const GRAPHS = [
   { name: '#1', obj: graphObj1 },
   { name: '#2', obj: graphObj2 },
-  { name: '#3', obj: graphObj3 },
-  { name: '#4', obj: graphObj4 },
-  { name: '#5', obj: graphObj5 },
-  { name: '#6', obj: graphObj6 }
+  { name: '#3', obj: graphObj3 }
 ]
 
 class App extends Component {
@@ -178,6 +172,7 @@ class App extends Component {
     } = this.state
     const graphVis = this.graphToVis(graph.obj)
     const trust = (from && to) ? algorithm.fn(graph.obj, from, to) : null
+    const trustTruncated = trust ? String(trust).substring(0, 14) : trust
 
     const events = {
       select: (event) => {
@@ -191,7 +186,7 @@ class App extends Component {
     let buttonText, helpText
     if (mode === MODE_DEFAULT) {
       buttonText = 'measure trust'
-      helpText = (from && to) ? (`trust = ${trust}`) : ''
+      helpText = (from && to) ? (`trust = ${trustTruncated}`) : ''
     } else if ((mode === MODE_SELECT_FROM) || (mode === MODE_SELECT_TO)) {
       buttonText = 'restart'
       helpText = MODE_STATUS[mode]
@@ -259,13 +254,13 @@ class App extends Component {
               <img src={githubLogo} className="github" />
             </a>
           </div>
-          <div className="controls section">
+          {helpText && (
             <div className="trust-score">
               {helpText}
             </div>
-            <div onClick={this.modeSelectFrom.bind(this)} className="button">
-              {buttonText}
-            </div>
+          )}
+          <div onClick={this.modeSelectFrom.bind(this)} className="button">
+            {buttonText}
           </div>
           <div className="display section">
             <Graph graph={graphVis} options={visOptions} events={events} />

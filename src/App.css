@@ -17,26 +17,6 @@ html, body {
   flex-direction: column;
 }
 
-.section {
-  /* flex: 1; */
-}
-
-.controls {
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin: auto;
-  bottom: 20px;
-  color: #eee;
-  z-index: 1;
-  /* display: flex; */
-}
-
-.controls {
-  text-align: center;
-  width: 100%;
-}
-
 .display {
   height: 100%;
   width: 100%;
@@ -50,12 +30,18 @@ html, body {
   font-size: 22px;
   border: 3px solid #39ff7b;
   color: #39ff7b;
-  padding: 10px;
+  padding: 10px 0;
   padding-bottom: 15px;
   opacity: 0.25;
   display: inline-block;
-  width: 160px;
+  width: 170px;
   box-shadow: 0 0 10px #000;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  margin-left: -88px;
+  z-index: 1;
+  text-align: center;
 }
 
 .button:hover {
@@ -65,7 +51,18 @@ html, body {
 
 .trust-score {
   margin-bottom: 15px;
-  font-size: 36px;
+  font-size: 26px;
+  display: inline-block;
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  margin-left: -150px;
+  color: #fff;
+  text-align: center;
+  width: 300px;
+  padding: 20px 0;
+  background: rgba(255, 255, 255, 0.02);
+  z-index: 1;
 }
 
 .panel {
