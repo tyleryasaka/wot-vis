@@ -102,13 +102,13 @@ class App extends Component {
     this.setState({ measureTrust: { ...this.state.measureTrust, to } })
   }
 
-  onNodeSelect(nodes, edges) {
+  onNodeSelect(node) {
     const { mode } = this.state
     if (mode === MODE_SELECT_FROM) {
-      this.setFrom(nodes[0])
+      this.setFrom(node)
       this.modeSelectTo()
     } else if (mode === MODE_SELECT_TO) {
-      this.setTo(nodes[0])
+      this.setTo(node)
       this.modeReset()
     }
   }
@@ -121,38 +121,31 @@ class App extends Component {
     const events = {
       select: (event) => {
         const { nodes, edges } = event;
-        this.onNodeSelect(nodes, edges)
+        if (nodes.length) {
+          this.onNodeSelect(nodes[0])
+        }
       }
     }
 
-    const status = MODE_STATUS[mode]
-    let dashView
+    let buttonText, helpText
     if (mode === MODE_DEFAULT) {
-      dashView = (
-        <div>
-          { from && to && (
-            <div>
-              Trust from {from} to {to}: {trust}
-            </div>
-          ) }
-          <button onClick={this.modeSelectFrom.bind(this)}>
-            measure trust
-          </button>
-        </div>
-      )
+      buttonText = 'measure trust'
+      helpText = (from && to) ? (`trust = ${trust}`) : ''
     } else if ((mode === MODE_SELECT_FROM) || (mode === MODE_SELECT_TO)) {
-      dashView = (
-        <div>
-          {status}
-        </div>
-      )
+      buttonText = 'restart'
+      helpText = MODE_STATUS[mode]
     }
 
     return (
       <div className="App">
         <div className="container">
           <div className="controls section">
-            {dashView}
+            <div className="trust-score">
+              {helpText}
+            </div>
+            <div onClick={this.modeSelectFrom.bind(this)} className="button">
+              {buttonText}
+            </div>
           </div>
           <div className="display section">
             <Graph graph={graphVis} options={visOptions} events={events} />

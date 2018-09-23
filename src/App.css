@@ -12,28 +12,58 @@ html, body {
 
 .container {
   height: 100%;
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
 }
 
 .section {
-  flex: 1;
+  /* flex: 1; */
 }
 
 .controls {
-  color: #ccc;
-  z-index: 100;
-  background: #000;
-  display: flex;
+  font-family: 'Dosis', sans-serif;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  bottom: 20px;
+  color: #eee;
+  z-index: 1;
+  /* display: flex; */
 }
 
-.controls div {
+.controls {
   text-align: center;
   width: 100%;
 }
 
 .display {
+  height: 100%;
+  width: 100%;
   background: #000000;
   background: rgb(12,50,24);
   background: linear-gradient(299deg, rgba(12,50,24,1) 0%, rgba(9,27,36,1) 49%, rgba(61,15,41,1) 100%);
+}
+
+.button {
+  font-size: 22px;
+  border-radius: 26px;
+  color: #222;
+  padding: 10px;
+  padding-bottom: 15px;
+  opacity: 0.5;
+  display: inline-block;
+  background: #39ff7b;
+  width: 160px;
+  box-shadow: 0 0 10px #000;
+}
+
+.button:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.trust-score {
+  margin-bottom: 15px;
+  font-size: 40px;
 }
