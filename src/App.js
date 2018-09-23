@@ -3,17 +3,17 @@ import logo from './logo.svg';
 import './App.css';
 import Graph from 'react-graph-vis';
 import graphLib from '@dagrejs/graphlib'
+
 import algorithm1Fn from './lib/algorithms/alg-1'
 import algorithm2Fn from './lib/algorithms/alg-2'
 import algorithm3Fn from './lib/algorithms/alg-3'
 
-import graphConfig from './graph-config.json'
-
-const {
-  initialGraph: initialGraphName
-} = graphConfig
-
-const initialGraph = require(`./lib/graphs/graph-${initialGraphName}`)
+import graphObj1 from './lib/graphs/graph-e'
+import graphObj2 from './lib/graphs/graph-c'
+import graphObj3 from './lib/graphs/graph-b'
+import graphObj4 from './lib/graphs/graph-a'
+import graphObj5 from './lib/graphs/graph-f'
+import graphObj6 from './lib/graphs/graph-g'
 
 const MODE_SELECT_FROM = 'select-from'
 const MODE_SELECT_TO = 'select-to'
@@ -36,11 +36,21 @@ const OBSERVER_NODE_COLOR = '#fff'
 const TARGET_NODE_COLOR = '#fff'
 
 const MODAL_ALGORITHM = 'algorithm'
+const MODAL_GRAPH = 'graph'
 
 const ALGORITHMS = [
   { name: '#1', fn: algorithm1Fn },
   { name: '#2', fn: algorithm2Fn },
   { name: '#3', fn: algorithm3Fn }
+]
+
+const GRAPHS = [
+  { name: '#1', obj: graphObj1 },
+  { name: '#2', obj: graphObj2 },
+  { name: '#3', obj: graphObj3 },
+  { name: '#4', obj: graphObj4 },
+  { name: '#5', obj: graphObj5 },
+  { name: '#6', obj: graphObj6 }
 ]
 
 class App extends Component {
@@ -51,7 +61,7 @@ class App extends Component {
       algorithm: ALGORITHMS[0],
       mode: MODE_DEFAULT,
       measureTrust: { from: null, to: null },
-      graph: initialGraph,
+      graph: GRAPHS[0],
       visOptions: {
         edges: {
           smooth: {
@@ -113,6 +123,18 @@ class App extends Component {
     this.setState({ algorithm: ALGORITHMS[index], currentModal: null })
   }
 
+  openModalGraph() {
+    this.setState({ currentModal: MODAL_GRAPH })
+  }
+
+  onGraphSelect(index) {
+    this.setState({
+      graph: GRAPHS[index],
+      measureTrust: { from: null, to: null },
+      currentModal: null
+    })
+  }
+
   graphToVis(graphObj) {
     const { from, to } = this.state.measureTrust
     const graphJson = graphLib.json.write(graphObj)
@@ -151,8 +173,8 @@ class App extends Component {
       visOptions,
       currentModal
     } = this.state
-    const graphVis = this.graphToVis(graph)
-    const trust = (from && to) ? algorithm.fn(graph, from, to) : null
+    const graphVis = this.graphToVis(graph.obj)
+    const trust = (from && to) ? algorithm.fn(graph.obj, from, to) : null
 
     const events = {
       select: (event) => {
@@ -177,6 +199,7 @@ class App extends Component {
         hi
       </div>
     )
+
     const modalAlgorithm = (currentModal === MODAL_ALGORITHM) && (
       <div className="modal algorithm">
         select algorithm
@@ -190,11 +213,25 @@ class App extends Component {
       </div>
     )
 
+    const modalGraph = (currentModal === MODAL_GRAPH) && (
+      <div className="modal graph">
+        select graph
+        {
+          GRAPHS.map((graph, index) =>
+            <div className="selection-option" onClick={this.onGraphSelect.bind(this, index)}>
+              {graph.name}
+            </div>
+          )
+        }
+      </div>
+    )
+
     return (
       <div className="App">
         <div className="container">
         {modalBackdrop}
         {modalAlgorithm}
+        {modalGraph}
         <div className="panel">
             <div className="legend">
               <div className="legend-item good">
@@ -206,6 +243,9 @@ class App extends Component {
               <div className="legend-item confused">
                 confused nodes
               </div>
+            </div>
+            <div className="selection graph" onClick={this.openModalGraph.bind(this)}>
+              graph: {graph.name}
             </div>
             <div className="selection algorithm" onClick={this.openModalAlgorithm.bind(this)}>
               algorithm: {algorithm.name}
