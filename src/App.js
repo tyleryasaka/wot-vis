@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Graph from 'react-graph-vis';
+import React, { Component } from 'react'
+import logo from './logo.svg'
+import './App.css'
+import Graph from 'react-graph-vis'
 import graphLib from '@dagrejs/graphlib'
+import githubLogo from './github-logo.svg'
 
 import algorithm1Fn from './lib/algorithms/alg-1'
 import algorithm2Fn from './lib/algorithms/alg-2'
@@ -250,6 +251,11 @@ class App extends Component {
             <div className="selection algorithm" onClick={this.openModalAlgorithm.bind(this)}>
               algorithm: {algorithm.name}
             </div>
+          </div>
+          <div className="links">
+            <a href="https://github.com/tyleryasaka/wot-vis" target="_blank">
+              <img src={githubLogo} className="github" />
+            </a>
           </div>
           <div className="controls section">
             <div className="trust-score">

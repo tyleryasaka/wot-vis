@@ -172,3 +172,23 @@ html, body {
   opacity: 0.75;
   cursor: pointer;
 }
+
+.links {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 2;
+}
+
+.links > a {
+  opacity: 0.25;
+}
+
+.links > a:hover {
+  opacity: 0.75;
+}
+
+.github {
+  width: 40px;
+  height: 40px;
+}
