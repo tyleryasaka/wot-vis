@@ -3,6 +3,8 @@ Web of Trust Visualizer :cherry_blossom:
 
 This is a visualizer to accompany [my paper on measuring trust](https://github.com/WebOfTrustInfo/rwot7/blob/master/supporting-files/measuring-trust.pdf). The abstract is included below.
 
+![](./media/screenshot.png)
+
 ## Abstract
 
 > “I'm not reading a good review on Yelp.”
