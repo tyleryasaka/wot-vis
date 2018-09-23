@@ -35,16 +35,19 @@ NODE_COLORS[NODE_CONFUSED] = '#37c3ff'
 const OBSERVER_NODE_COLOR = '#fff'
 const TARGET_NODE_COLOR = '#fff'
 
+const MODAL_ALGORITHM = 'algorithm'
+
 const ALGORITHMS = [
-  { name: 'algirithm 1', fn: algorithm1Fn },
-  { name: 'algorithm 2', fn: algorithm2Fn },
-  { name: 'algorithm 3', fn: algorithm3Fn }
+  { name: '#1', fn: algorithm1Fn },
+  { name: '#2', fn: algorithm2Fn },
+  { name: '#3', fn: algorithm3Fn }
 ]
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      currentModal: null,
       algorithm: ALGORITHMS[0],
       mode: MODE_DEFAULT,
       measureTrust: { from: null, to: null },
@@ -102,6 +105,14 @@ class App extends Component {
     }
   }
 
+  openModalAlgorithm() {
+    this.setState({ currentModal: MODAL_ALGORITHM })
+  }
+
+  onAlgorithmSelect(index) {
+    this.setState({ algorithm: ALGORITHMS[index], currentModal: null })
+  }
+
   graphToVis(graphObj) {
     const { from, to } = this.state.measureTrust
     const graphJson = graphLib.json.write(graphObj)
@@ -132,7 +143,14 @@ class App extends Component {
   }
 
   render() {
-    const { mode, measureTrust: { from, to }, graph, algorithm, visOptions } = this.state
+    const {
+      mode,
+      measureTrust: { from, to },
+      graph,
+      algorithm,
+      visOptions,
+      currentModal
+    } = this.state
     const graphVis = this.graphToVis(graph)
     const trust = (from && to) ? algorithm.fn(graph, from, to) : null
 
@@ -154,18 +172,43 @@ class App extends Component {
       helpText = MODE_STATUS[mode]
     }
 
+    const modalBackdrop = (currentModal) && (
+      <div className="modal-backdrop">
+        hi
+      </div>
+    )
+    const modalAlgorithm = (currentModal === MODAL_ALGORITHM) && (
+      <div className="modal algorithm">
+        select algorithm
+        {
+          ALGORITHMS.map((algorithm, index) =>
+            <div className="selection-option" onClick={this.onAlgorithmSelect.bind(this, index)}>
+              {algorithm.name}
+            </div>
+          )
+        }
+      </div>
+    )
+
     return (
       <div className="App">
         <div className="container">
-          <div className="legend">
-            <div className="legend-item good">
-              good nodes
+        {modalBackdrop}
+        {modalAlgorithm}
+        <div className="panel">
+            <div className="legend">
+              <div className="legend-item good">
+                good nodes
+              </div>
+              <div className="legend-item bad">
+                bad nodes
+              </div>
+              <div className="legend-item confused">
+                confused nodes
+              </div>
             </div>
-            <div className="legend-item bad">
-              bad nodes
-            </div>
-            <div className="legend-item confused">
-              confused nodes
+            <div className="selection algorithm" onClick={this.openModalAlgorithm.bind(this)}>
+              algorithm: {algorithm.name}
             </div>
           </div>
           <div className="controls section">
