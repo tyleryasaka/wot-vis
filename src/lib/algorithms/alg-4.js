@@ -11,7 +11,7 @@ function getTrust(graph, source, target, visited = []) {
   newVisited.push(source)
   const successors = graph.successors(source)
   const subScores = successors.map((successor) => {
-    return getTrust(graph, successor, target, newVisited) / (successors.length)
+    return getTrust(graph, successor, target, newVisited) / (2 * successors.length)
   })
   return subScores.reduce((acc, cur) => acc + cur, 0)
 }

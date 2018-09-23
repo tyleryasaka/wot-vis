@@ -8,6 +8,7 @@ import githubLogo from './github-logo.svg'
 import algorithm1Fn from './lib/algorithms/alg-1'
 import algorithm2Fn from './lib/algorithms/alg-2'
 import algorithm3Fn from './lib/algorithms/alg-3'
+import algorithm4Fn from './lib/algorithms/alg-4'
 
 import graphObj1 from './lib/graphs/graph-e'
 import graphObj2 from './lib/graphs/graph-c'
@@ -40,9 +41,10 @@ const MODAL_ALGORITHM = 'algorithm'
 const MODAL_GRAPH = 'graph'
 
 const ALGORITHMS = [
-  { name: '#1', fn: algorithm1Fn },
-  { name: '#2', fn: algorithm2Fn },
-  { name: '#3', fn: algorithm3Fn }
+  { name: 'example 1', fn: algorithm1Fn },
+  { name: 'example 2', fn: algorithm2Fn },
+  { name: 'example 3', fn: algorithm3Fn },
+  { name: 'example 4', fn: algorithm4Fn }
 ]
 
 const GRAPHS = [
