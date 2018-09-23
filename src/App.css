@@ -21,6 +21,7 @@ html, body {
 }
 
 .controls {
+  color: #ccc;
   z-index: 100;
   background: #000;
   display: flex;

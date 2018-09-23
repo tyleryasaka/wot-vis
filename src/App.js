@@ -13,10 +13,9 @@ const {
 const initialGraph = require(`./lib/graphs/graph-${initialGraphName}`)
 const initialAlgorithm = require(`./lib/algorithms/alg-${initialAlgorithmName}`)
 
-const options = {}
-
 const MODE_SELECT_FROM = 'select-from'
 const MODE_SELECT_TO = 'select-to'
+const MODE_DEFAULT = 'default'
 
 const MODE_STATUS = {}
 MODE_STATUS[MODE_SELECT_FROM] = 'Select the observer node'
@@ -45,20 +44,9 @@ const graphToVis = (graphObj) => {
   })
   const edges = graphJson.edges.map(edge => {
     return {
+      id: `${edge.v}-${edge.w}`,
       from: edge.v,
-      to: edge.w,
-      smooth: {
-        enabled: true
-      },
-      width: 3,
-      chosen: {
-        edge: (values => {
-          values.opacity = 0.9
-        })
-      },
-      color: {
-        opacity: 0.25
-      }
+      to: edge.w
     }
   })
   return { nodes, edges }
@@ -68,15 +56,31 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      mode: null,
+      mode: MODE_DEFAULT,
       measureTrust: { from: null, to: null },
       graph: initialGraph,
-      algorithm: initialAlgorithm
+      algorithm: initialAlgorithm,
+      visOptions: {
+        edges: {
+          smooth: {
+            enabled: true
+          },
+          chosen: {
+            edge: (values => {
+              values.opacity = 0.9
+            })
+          },
+          color: {
+            opacity: 0.25
+          },
+          width: 3
+        }
+      }
     }
   }
 
   modeReset() {
-    this.setState({ mode: null })
+    this.setState({ mode: MODE_DEFAULT })
   }
 
   modeSelectFrom() {
@@ -110,7 +114,7 @@ class App extends Component {
   }
 
   render() {
-    const { mode, measureTrust: { from, to }, graph, algorithm } = this.state
+    const { mode, measureTrust: { from, to }, graph, algorithm, visOptions } = this.state
     const graphVis = graphToVis(graph)
     const trust = (from && to) ? algorithm(graph, from, to) : null
 
@@ -123,7 +127,7 @@ class App extends Component {
 
     const status = MODE_STATUS[mode]
     let dashView
-    if (!mode) {
+    if (mode === MODE_DEFAULT) {
       dashView = (
         <div>
           { from && to && (
@@ -151,7 +155,7 @@ class App extends Component {
             {dashView}
           </div>
           <div className="display section">
-            <Graph graph={graphVis} options={options} events={events} />
+            <Graph graph={graphVis} options={visOptions} events={events} />
           </div>
         </div>
       </div>
