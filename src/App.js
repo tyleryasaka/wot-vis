@@ -18,8 +18,8 @@ const MODE_SELECT_TO = 'select-to'
 const MODE_DEFAULT = 'default'
 
 const MODE_STATUS = {}
-MODE_STATUS[MODE_SELECT_FROM] = 'Select the observer node'
-MODE_STATUS[MODE_SELECT_TO] = 'Select the observed node'
+MODE_STATUS[MODE_SELECT_FROM] = 'select the observer node'
+MODE_STATUS[MODE_SELECT_TO] = 'select the target node'
 
 const NODE_GOOD = 'good'
 const NODE_BAD = 'bad'
@@ -30,27 +30,8 @@ NODE_COLORS[NODE_GOOD] = '#39ff7b'
 NODE_COLORS[NODE_BAD] = '#ff3aa9'
 NODE_COLORS[NODE_CONFUSED] = '#37c3ff'
 
-const graphToVis = (graphObj) => {
-  const graphJson = graphLib.json.write(graphObj)
-  const nodes = graphJson.nodes.map(node => {
-    const value = node.value || 'good'
-    const color = NODE_COLORS[value]
-    return {
-      id: node.v,
-      // label: node.v,
-      borderWidth: 0,
-      color
-    }
-  })
-  const edges = graphJson.edges.map(edge => {
-    return {
-      id: `${edge.v}-${edge.w}`,
-      from: edge.v,
-      to: edge.w
-    }
-  })
-  return { nodes, edges }
-}
+const OBSERVER_NODE_COLOR = '#fff'
+const TARGET_NODE_COLOR = '#fff'
 
 class App extends Component {
   constructor(props) {
@@ -113,9 +94,38 @@ class App extends Component {
     }
   }
 
+  graphToVis(graphObj) {
+    const { from, to } = this.state.measureTrust
+    const graphJson = graphLib.json.write(graphObj)
+    const nodes = graphJson.nodes.map(node => {
+      const value = node.value || 'good'
+      const id = node.v
+      let color = NODE_COLORS[value]
+      if (id === from) {
+        color = OBSERVER_NODE_COLOR
+      } else if (id === to) {
+        color = TARGET_NODE_COLOR
+      }
+      return {
+        id,
+        // label: node.v,
+        borderWidth: 0,
+        color
+      }
+    })
+    const edges = graphJson.edges.map(edge => {
+      return {
+        id: `${edge.v}-${edge.w}`,
+        from: edge.v,
+        to: edge.w
+      }
+    })
+    return { nodes, edges }
+  }
+
   render() {
     const { mode, measureTrust: { from, to }, graph, algorithm, visOptions } = this.state
-    const graphVis = graphToVis(graph)
+    const graphVis = this.graphToVis(graph)
     const trust = (from && to) ? algorithm(graph, from, to) : null
 
     const events = {
