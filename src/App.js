@@ -9,6 +9,7 @@ import algorithm1Fn from './lib/algorithms/alg-1'
 import algorithm2Fn from './lib/algorithms/alg-2'
 import algorithm3Fn from './lib/algorithms/alg-3'
 import algorithm4Fn from './lib/algorithms/alg-4'
+import algorithm5Fn from './lib/algorithms/alg-5'
 
 import graphObj1 from './lib/graphs/graph-1'
 import graphObj2 from './lib/graphs/graph-2'
@@ -41,7 +42,8 @@ const ALGORITHMS = [
   { name: 'example 1', fn: algorithm1Fn },
   { name: 'example 2', fn: algorithm2Fn },
   { name: 'example 3', fn: algorithm3Fn },
-  { name: 'example 4', fn: algorithm4Fn }
+  { name: 'example 4', fn: algorithm4Fn },
+  { name: '#5', fn: algorithm5Fn }
 ]
 
 const GRAPHS = [
