@@ -14,6 +14,7 @@ import algorithm5Fn from './lib/algorithms/alg-5'
 import graphObj1 from './lib/graphs/graph-1'
 import graphObj2 from './lib/graphs/graph-2'
 import graphObj3 from './lib/graphs/graph-3'
+import graphObj4 from './lib/graphs/graph-4'
 
 const MODE_SELECT_FROM = 'select-from'
 const MODE_SELECT_TO = 'select-to'
@@ -49,7 +50,8 @@ const ALGORITHMS = [
 const GRAPHS = [
   { name: '#1', obj: graphObj1 },
   { name: '#2', obj: graphObj2 },
-  { name: '#3', obj: graphObj3 }
+  { name: '#3', obj: graphObj3 },
+  { name: '#4', obj: graphObj4 }
 ]
 
 class App extends Component {

@@ -4,7 +4,7 @@ const graphlib = require('@dagrejs/graphlib')
 function graphE() {
   let graph = new graphlib.Graph()
   const confusedNodes = [10]
-  const badNodes = _.range(14, 27).concat('C')
+  const badNodes = _.range(14, 20).concat('C')
   const doubleEdges = [
     [1, 2],
     [2, 'A'],
@@ -40,25 +40,13 @@ function graphE() {
     [14, 18],
     [14, 19],
     [14, 20],
-    [14, 21],
-    [14, 22],
-    [14, 23],
-    [14, 24],
-    [14, 25],
-    [14, 26],
 
     [15, 'C'],
     [16, 'C'],
     [17, 'C'],
     [18, 'C'],
     [19, 'C'],
-    [20, 'C'],
-    [21, 'C'],
-    [22, 'C'],
-    [23, 'C'],
-    [24, 'C'],
-    [25, 'C'],
-    [26, 'C']
+    [20, 'C']
   ]
   doubleEdges.forEach(([a, b]) => {
     graph.setEdge(String(a), String(b))

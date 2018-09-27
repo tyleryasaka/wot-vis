@@ -3,7 +3,7 @@ const graphlib = require('@dagrejs/graphlib')
 
 function graphE() {
   let graph = new graphlib.Graph()
-  const confusedNodes = [10]
+  const confusedNodes = [10, 11]
   const badNodes = _.range(14, 27).concat('C')
   const doubleEdges = [
     [1, 2],
@@ -33,6 +33,7 @@ function graphE() {
   ]
   const edges = [
     [10, 14],
+    [11, 14],
 
     [14, 15],
     [14, 16],
