@@ -1,5 +1,4 @@
 {
-  "initialGraph": "e",
-  "initialAlgorithm": "2",
-  "discount": 0.2
+  "discount": 0.25,
+  "iterations": 7
 }
