@@ -5,11 +5,6 @@ import Graph from 'react-graph-vis'
 import graphLib from '@dagrejs/graphlib'
 import githubLogo from './github-logo.svg'
 
-import algorithm1Fn from './lib/algorithms/alg-1'
-import algorithm2Fn from './lib/algorithms/alg-2'
-import algorithm3Fn from './lib/algorithms/alg-3'
-import algorithm4Fn from './lib/algorithms/alg-4'
-import algorithm5Fn from './lib/algorithms/alg-5'
 import algorithm6Fn from './lib/algorithms/alg-6'
 
 import graphObj1 from './lib/graphs/graph-1'
@@ -42,11 +37,6 @@ const MODAL_ALGORITHM = 'algorithm'
 const MODAL_GRAPH = 'graph'
 
 const ALGORITHMS = [
-  { name: 'example 1', fn: algorithm1Fn },
-  { name: 'example 2', fn: algorithm2Fn },
-  { name: 'example 3', fn: algorithm3Fn },
-  { name: 'example 4', fn: algorithm4Fn },
-  { name: '#5', fn: algorithm5Fn },
   { name: '#6', fn: algorithm6Fn }
 ]
 
@@ -252,9 +242,6 @@ class App extends Component {
             </div>
             <div className="selection graph" onClick={this.openModalGraph.bind(this)}>
               graph: {graph.name}
-            </div>
-            <div className="selection algorithm" onClick={this.openModalAlgorithm.bind(this)}>
-              metric: {algorithm.name}
             </div>
           </div>
           <div className="links">
