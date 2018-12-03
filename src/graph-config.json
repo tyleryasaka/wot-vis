@@ -1,4 +1,5 @@
 {
-  "discount": 0.25,
+  "discount": 0.5,
+  "gradient": 1,
   "iterations": 7
 }
