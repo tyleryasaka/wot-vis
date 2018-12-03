@@ -1,9 +1,9 @@
 import _ from 'underscore'
 import graphConfig from '../../graph-config.json'
 
-const { discount } = graphConfig
+const { discount, gradient } = graphConfig
 
-function getTrust(graph, source, target, visited = []) {
+function getTrust(graph, source, target, visited = [], currentDiscount = discount) {
   if (source === target) {
     return 1
   }
@@ -14,8 +14,16 @@ function getTrust(graph, source, target, visited = []) {
   newVisited.push(source)
   const successors = graph.successors(source)
   const doubts = successors.map((successor) => {
-    const successorTrust = (1 - discount) * getTrust(graph, successor, target, newVisited)
-    return 1 - successorTrust
+    const fromSuccessor = getTrust(
+      graph,
+      successor,
+      target,
+      newVisited,
+      currentDiscount * gradient
+    )
+    const toSuccessor = 1 - currentDiscount
+    const throughSuccessor = toSuccessor * fromSuccessor
+    return 1 - throughSuccessor
   })
   const totalDoubt = doubts.reduce((acc, cur) => acc * cur, 1)
   return 1 - totalDoubt
